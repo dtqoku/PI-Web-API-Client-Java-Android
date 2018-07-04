@@ -68,7 +68,7 @@ Then manually install the following JARs:
 
 ## Download from JitPack repository (Gradle and Maven)
 
-You can download the package through JitPack. Just follow the steps described [here](https://jitpack.io/#osimloeff/PI-Web-API-Client-Java-Android/1.1.1).
+You can download the package through JitPack. Just follow the steps described [here](https://jitpack.io/#osimloeff/PI-Web-API-Client-Java-Android/1.11.0).
 
 
 ## Documentation
