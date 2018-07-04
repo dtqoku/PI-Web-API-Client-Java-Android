@@ -24,6 +24,8 @@ Method | HTTP request | Description
 [**getRecordedAtTimeAdHoc**](StreamSetApi.md#getrecordedattimeadhoc) | **GET** /streamsets/recordedattime | Returns recorded values based on the passed time and retrieval mode.
 [**getRecordedAtTimesAdHoc**](StreamSetApi.md#getrecordedattimesadhoc) | **GET** /streamsets/recordedattimes | Returns recorded values of the specified streams at the specified times.
 [**getSummariesAdHoc**](StreamSetApi.md#getsummariesadhoc) | **GET** /streamsets/summary | Returns summary values of the specified streams.
+[**retrieveStreamSetUpdates**](StreamSetApi.md#retrievestreamsetupdates) | **GET** /streamsets/updates | Receive stream updates
+[**registerStreamSetUpdates**](StreamSetApi.md#registerstreamsetupdates) | **POST** /streamsets/updates | Register for stream updates
 [**getValuesAdHoc**](StreamSetApi.md#getvaluesadhoc) | **GET** /streamsets/value | Returns values of the specified streams.
 [**updateValueAdHoc**](StreamSetApi.md#updatevalueadhoc) | **POST** /streamsets/value | Updates a single value for the specified streams.
 
@@ -71,7 +73,7 @@ Name | Type | Description | Notes
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **showExcluded** | **Boolean**| Specified if the search should include attributes with the Excluded property set. The default is 'false'.. | [optional]
  **showHidden** | **Boolean**| Specified if the search should include attributes with the Hidden property set. The default is 'false'.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **templateName** | **String**| Specify that included attributes must be members of this template. The default is no template filter.. | [optional]
  **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
@@ -103,8 +105,8 @@ Name | Type | Description | Notes
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **showExcluded** | **Boolean**| Specified if the search should include attributes with the Excluded property set. The default is 'false'.. | [optional]
  **showHidden** | **Boolean**| Specified if the search should include attributes with the Hidden property set. The default is 'false'.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
- **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'.. | [optional]
  **startTime** | **String**| An optional start time. The default is '*-1d' for element attributes and points. For event frame attributes, the default is the event frame's start time, or '*-1d' if that is not set.. | [optional]
  **syncTime** | **String**| An optional start time anchor, in AFTime format. When specified, interpolated data retrieval will use the sync time as the origin for calculating the interval times.. | [optional]
  **syncTimeBoundaryType** | **String**| An optional string specifying the boundary type to use when applying a syncTime. The allowed values are 'Inside' and 'Outside'. The default is 'Inside'.. | [optional]
@@ -168,7 +170,7 @@ Name | Type | Description | Notes
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **showExcluded** | **Boolean**| Specified if the search should include attributes with the Excluded property set. The default is 'false'.. | [optional]
  **showHidden** | **Boolean**| Specified if the search should include attributes with the Hidden property set. The default is 'false'.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **startTime** | **String**| An optional start time. The default is '*-1d' for element attributes and points. For event frame attributes, the default is the event frame's start time, or '*-1d' if that is not set.. | [optional]
  **templateName** | **String**| Specify that included attributes must be members of this template. The default is no template filter.. | [optional]
@@ -203,7 +205,7 @@ Name | Type | Description | Notes
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **showExcluded** | **Boolean**| Specified if the search should include attributes with the Excluded property set. The default is 'false'.. | [optional]
  **showHidden** | **Boolean**| Specified if the search should include attributes with the Hidden property set. The default is 'false'.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **startTime** | **String**| An optional start time. The default is '*-1d' for element attributes and points. For event frame attributes, the default is the event frame's start time, or '*-1d' if that is not set.. | [optional]
  **templateName** | **String**| Specify that included attributes must be members of this template. The default is no template filter.. | [optional]
@@ -349,7 +351,7 @@ Name | Type | Description | Notes
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **showExcluded** | **Boolean**| Specified if the search should include attributes with the Excluded property set. The default is 'false'.. | [optional]
  **showHidden** | **Boolean**| Specified if the search should include attributes with the Hidden property set. The default is 'false'.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **templateName** | **String**| Specify that included attributes must be members of this template. The default is no template filter.. | [optional]
  **time** | **String**| An AF time string, which is used as the time context to get stream values if it is provided. By default, it is not specified, and the default time context of the AF object will be used.. | [optional]
@@ -416,7 +418,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **List<String>**| The ID of a stream. Multiple streams may be specified with multiple instances of the parameter.. | [required]
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
@@ -442,7 +444,7 @@ Name | Type | Description | Notes
  **includeFilteredValues** | **Boolean**| Specify 'true' to indicate that values which fail the filter criteria are present in the returned data at the times where they occurred with a value set to a 'Filtered' enumeration value with bad status. Repeated consecutive failures are omitted.. | [optional]
  **interval** | **String**| The sampling interval, in AFTimeSpan format.. | [optional]
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **startTime** | **String**| An optional start time. The default is '*-1d'.. | [optional]
  **syncTime** | **String**| An optional start time anchor, in AFTime format. When specified, interpolated data retrieval will use the sync time as the origin for calculating the interval times.. | [optional]
@@ -495,7 +497,7 @@ Name | Type | Description | Notes
  **endTime** | **String**| An optional end time. The default is '*'. Note that if endTime is earlier than startTime, the resulting values will be in time-descending order.. | [optional]
  **intervals** | **Integer**| The number of intervals to plot over. Typically, this would be the number of horizontal pixels in the trend. The default is '24'. For each interval, the data available is examined and significant values are returned. Each interval can produce up to 5 values if they are unique, the first value in the interval, the last value, the highest value, the lowest value and at most one exceptional point (bad status or digital state).. | [optional]
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **startTime** | **String**| An optional start time. The default is '*-1d'.. | [optional]
  **timeZone** | **String**| The time zone in which the time string will be interpreted. This parameter will be ignored if a time zone is specified in the time string. If no time zone is specified in either places, the PI Web API server time zone will be used.. | [optional]
@@ -524,7 +526,7 @@ Name | Type | Description | Notes
  **includeFilteredValues** | **Boolean**| Specify 'true' to indicate that values which fail the filter criteria are present in the returned data at the times where they occurred with a value set to a 'Filtered' enumeration value with bad status. Repeated consecutive failures are omitted.. | [optional]
  **maxCount** | **Integer**| The maximum number of values to be returned. The default is 1000.. | [optional]
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **startTime** | **String**| An optional start time. The default is '*-1d'.. | [optional]
  **timeZone** | **String**| The time zone in which the time string will be interpreted. This parameter will be ignored if a time zone is specified in the time string. If no time zone is specified in either places, the PI Web API server time zone will be used.. | [optional]
@@ -634,6 +636,46 @@ Name | Type | Description | Notes
 
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
+# **retrieveStreamSetUpdates**
+> retrieveStreamSetUpdates(List<String> marker, String selectedFields, String webIdType)
+
+Receive stream updates
+
+### Parameters
+
+Name | Type | Description | Notes
+------------- | ------------- | ------------- | -------------
+ **marker** | **List<String>**| Identifier of stream source and current position. Multiple markers may be specified with multiple instances of the parameter.. | [required]
+ **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
+
+
+### Return type
+
+
+
+[[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
+
+# **registerStreamSetUpdates**
+> registerStreamSetUpdates(List<String> webId, String selectedFields, String webIdType)
+
+Register for stream updates
+
+### Parameters
+
+Name | Type | Description | Notes
+------------- | ------------- | ------------- | -------------
+ **webId** | **List<String>**| The ID of a stream. Multiple streams may be specified with multiple instances of the parameter.. | [required]
+ **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
+
+
+### Return type
+
+
+
+[[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
+
 # **getValuesAdHoc**
 > getValuesAdHoc(List<String> webId, String selectedFields, String sortField, String sortOrder, String time, String timeZone, String webIdType)
 
@@ -645,7 +687,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **List<String>**| The ID of a stream. Multiple streams may be specified with multiple instances of the parameter.. | [required]
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
- **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, The default is unsorted. 'Name' is the only supported field by which to sort.. | [optional]
+ **sortField** | **String**| The field or property of the object used to sort the returned collection. For better performance, by default no sorting is applied. 'Name' is the only supported field by which to sort.. | [optional]
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'. | [optional]
  **time** | **String**| An AF time string, which is used as the time context to get stream values if it is provided. By default, it is not specified, and the default time context of the AF object will be used.. | [optional]
  **timeZone** | **String**| The time zone in which the time string will be interpreted. This parameter will be ignored if a time zone is specified in the time string. If no time zone is specified in either places, the PI Web API server time zone will be used.. | [optional]

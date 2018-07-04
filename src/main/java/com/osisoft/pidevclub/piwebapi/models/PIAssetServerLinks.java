@@ -32,6 +32,9 @@ public class PIAssetServerLinks {
 	@SerializedName("Databases")
 	private String databases = null;
 
+	@SerializedName("NotificationContactTemplates")
+	private String notificationContactTemplates = null;
+
 	@SerializedName("SecurityIdentities")
 	private String securityIdentities = null;
 
@@ -64,6 +67,10 @@ public class PIAssetServerLinks {
 	public void setDatabases(String databases) { this.databases = databases;}
 
 	public String getDatabases() { return this.databases;}
+
+	public void setNotificationContactTemplates(String notificationContactTemplates) { this.notificationContactTemplates = notificationContactTemplates;}
+
+	public String getNotificationContactTemplates() { return this.notificationContactTemplates;}
 
 	public void setSecurityIdentities(String securityIdentities) { this.securityIdentities = securityIdentities;}
 

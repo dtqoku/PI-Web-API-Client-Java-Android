@@ -9,7 +9,10 @@ Name | Type | Notes
 **Database** | **String**
 **Categories** | **String**
 **BaseTemplate** | **String**
+**BaseTemplates** | **String**
+**DerivedTemplates** | **String**
 **DefaultAttribute** | **String**
+**NotificationRuleTemplates** | **String**
 **Security** | **String**
 **SecurityEntries** | **String**
 

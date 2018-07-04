@@ -1,9 +1,9 @@
-PI Web API client library for Java and Android (2017 R2)
+PI Web API client library for Java and Android (2018)
 ===
 
 
 ## Overview
-This repository has the source code package of the PI Web API client library for Java and Android. This version was developed on top of the PI Web API 2017 R2 swagger specification.
+This repository has the source code package of the PI Web API client library for Java and Android. This version was developed on top of the PI Web API 2018 swagger specification.
 
 
 ## Requirements
@@ -42,7 +42,7 @@ Add this dependency to your project's POM:
 <dependency>
 	<groupId>com.osisoft.pidevclub</groupId>
 	<artifactId>piwebapi</artifactId>
-	<version>1.1.1</version>
+	<version>1.11.0</version>
 </dependency>
 ```
 
@@ -51,7 +51,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile 'com.osisoft.pidevclub:piwebapi:1.1.1'
+compile 'com.osisoft.pidevclub:piwebapi:1.11.0'
 ```
 
 ### Others
@@ -62,7 +62,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-* target/piwebapi-1.1.1.jar
+* target/piwebapi-1.11.0.jar
 * target/lib/*.jar
 
 
@@ -252,6 +252,38 @@ This library is only compatible with PI Web API Basic Authentication. As a resul
 	String web_id1 = client.getWebIdHelper().generateWebIdByPath("\\\\PISRV1\\CDF144_Repeated24h_forward", PIPoint.class, null);
 	String web_id2 = client.getWebIdHelper().generateWebIdByPath("\\\\PISRV1\\Universities\\UC Davis\\Buildings\\Academic Surge Building|Electricity Totalizer", 
 		PIAttribute.class, PIElement.class);
+```
+
+### StreamUpdates
+
+```java
+   List<String> eventsString= new ArrayList<String>();
+
+   PIItemsStreamUpdatesRegister piItemsStreamUpdatesRegister = client.getStreamSet().registerStreamSetUpdates(webIds, null, null);
+   List<String> markers = new ArrayList<String>();
+   for(PIStreamUpdatesRegister piStreamUpdatesRegister : piItemsStreamUpdatesRegister.getItems())
+   {
+		markers.add(piStreamUpdatesRegister.getLatestMarker());
+   }
+   int k = 3;
+   while (k > 0)
+   {
+		PIItemsStreamUpdatesRetrieve piItemsStreamUpdatesRetrieve = client.getStreamSet().retrieveStreamSetUpdates(markers, null, null);
+		markers = new ArrayList<String>();
+		for(PIStreamUpdatesRetrieve piStreamUpdatesRetrieve : piItemsStreamUpdatesRetrieve.getItems())
+		{
+			markers.add(piStreamUpdatesRetrieve.getLatestMarker());
+		}
+		for(PIStreamUpdatesRetrieve item : piItemsStreamUpdatesRetrieve.getItems())
+		{
+			for(PIDataPipeEvent piEvent : item.getEvents())
+			{
+				eventsString.add(piEvent.getValue().toString());
+			}
+		}
+		Thread.sleep(30000);
+		k--;
+   }
 ```
 
 

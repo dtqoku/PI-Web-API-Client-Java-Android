@@ -634,9 +634,6 @@ public class DataServerApi {
 		// verify the required parameter 'webId' is set
 		if (webId == null)
 			throw new ApiException("Missing required parameter 'webId'");
-		// verify the required parameter 'module' is set
-		if (module == null)
-			throw new ApiException("Missing required parameter 'module'");
 		String localVarPath = "/dataservers/{webId}/license";
 		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();

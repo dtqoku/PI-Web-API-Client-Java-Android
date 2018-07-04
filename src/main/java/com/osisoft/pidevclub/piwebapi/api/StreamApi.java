@@ -533,8 +533,8 @@ public class StreamApi {
 	 * Returns a list of compressed values for the requested time range from the source provider. 
 	 *
 	 */
-	public PITimedValues getRecorded(String webId, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone) throws ApiException {
-		ApiResponse<PITimedValues> resp = getRecordedWithHttpInfo(webId, boundaryType, desiredUnits, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone);
+	public PIExtendedTimedValues getRecorded(String webId, String associations, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone) throws ApiException {
+		ApiResponse<PIExtendedTimedValues> resp = getRecordedWithHttpInfo(webId, associations, boundaryType, desiredUnits, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone);
 		return resp.getData();
 	}
 
@@ -542,9 +542,9 @@ public class StreamApi {
 	 * Returns a list of compressed values for the requested time range from the source provider. (with HTTP information)
 	 *
 	 */
-	public ApiResponse<PITimedValues> getRecordedWithHttpInfo(String webId, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone) throws ApiException {
-		okhttp3.Call call = getRecordedCall(webId, boundaryType, desiredUnits, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone,null,null);
-		Type localVarReturnType = new TypeToken<PITimedValues>(){}.getType();
+	public ApiResponse<PIExtendedTimedValues> getRecordedWithHttpInfo(String webId, String associations, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone) throws ApiException {
+		okhttp3.Call call = getRecordedCall(webId, associations, boundaryType, desiredUnits, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone,null,null);
+		Type localVarReturnType = new TypeToken<PIExtendedTimedValues>(){}.getType();
 		return apiClient.execute(call, localVarReturnType);
 	}
 
@@ -552,7 +552,7 @@ public class StreamApi {
 	 * Returns a list of compressed values for the requested time range from the source provider. (asynchronously)
 	 *
 	 */
-	public okhttp3.Call getRecordedAsync(String webId, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone, final ApiCallback<PITimedValues> callback) throws ApiException {
+	public okhttp3.Call getRecordedAsync(String webId, String associations, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone, final ApiCallback<PIExtendedTimedValues> callback) throws ApiException {
 		ProgressResponseBody.ProgressListener progressListener = null;
 		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
 		if (callback != null)
@@ -572,12 +572,12 @@ public class StreamApi {
 				}
 			};
 		}
-		okhttp3.Call call = getRecordedCall(webId, boundaryType, desiredUnits, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone, progressListener, progressRequestListener);
+		okhttp3.Call call = getRecordedCall(webId, associations, boundaryType, desiredUnits, endTime, filterExpression, includeFilteredValues, maxCount, selectedFields, startTime, timeZone, progressListener, progressRequestListener);
 		apiClient.executeAsync(call, callback);
 		return call;
 	}
 
-	private okhttp3.Call getRecordedCall(String webId, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+	private okhttp3.Call getRecordedCall(String webId, String associations, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 		Object localVarPostBody =  null;
 		// verify the required parameter 'webId' is set
 		if (webId == null)
@@ -599,6 +599,8 @@ public class StreamApi {
 		localVarHeaderParams.put("Content-Type", localVarContentType);
 
 		localVarPath = localVarPath.replaceAll("\\{webId\\}", apiClient.escapeString(webId.toString()));
+		if (associations != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "associations", associations));
 		if (boundaryType != null)
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "boundaryType", boundaryType));
 		if (desiredUnits != null)
@@ -731,8 +733,8 @@ public class StreamApi {
 	 * Returns a single recorded value based on the passed time and retrieval mode from the stream. 
 	 *
 	 */
-	public PITimedValue getRecordedAtTime(String webId, String time, String desiredUnits, String retrievalMode, String selectedFields, String timeZone) throws ApiException {
-		ApiResponse<PITimedValue> resp = getRecordedAtTimeWithHttpInfo(webId, time, desiredUnits, retrievalMode, selectedFields, timeZone);
+	public PIExtendedTimedValue getRecordedAtTime(String webId, String time, String associations, String desiredUnits, String retrievalMode, String selectedFields, String timeZone) throws ApiException {
+		ApiResponse<PIExtendedTimedValue> resp = getRecordedAtTimeWithHttpInfo(webId, time, associations, desiredUnits, retrievalMode, selectedFields, timeZone);
 		return resp.getData();
 	}
 
@@ -740,9 +742,9 @@ public class StreamApi {
 	 * Returns a single recorded value based on the passed time and retrieval mode from the stream. (with HTTP information)
 	 *
 	 */
-	public ApiResponse<PITimedValue> getRecordedAtTimeWithHttpInfo(String webId, String time, String desiredUnits, String retrievalMode, String selectedFields, String timeZone) throws ApiException {
-		okhttp3.Call call = getRecordedAtTimeCall(webId, time, desiredUnits, retrievalMode, selectedFields, timeZone,null,null);
-		Type localVarReturnType = new TypeToken<PITimedValue>(){}.getType();
+	public ApiResponse<PIExtendedTimedValue> getRecordedAtTimeWithHttpInfo(String webId, String time, String associations, String desiredUnits, String retrievalMode, String selectedFields, String timeZone) throws ApiException {
+		okhttp3.Call call = getRecordedAtTimeCall(webId, time, associations, desiredUnits, retrievalMode, selectedFields, timeZone,null,null);
+		Type localVarReturnType = new TypeToken<PIExtendedTimedValue>(){}.getType();
 		return apiClient.execute(call, localVarReturnType);
 	}
 
@@ -750,7 +752,7 @@ public class StreamApi {
 	 * Returns a single recorded value based on the passed time and retrieval mode from the stream. (asynchronously)
 	 *
 	 */
-	public okhttp3.Call getRecordedAtTimeAsync(String webId, String time, String desiredUnits, String retrievalMode, String selectedFields, String timeZone, final ApiCallback<PITimedValue> callback) throws ApiException {
+	public okhttp3.Call getRecordedAtTimeAsync(String webId, String time, String associations, String desiredUnits, String retrievalMode, String selectedFields, String timeZone, final ApiCallback<PIExtendedTimedValue> callback) throws ApiException {
 		ProgressResponseBody.ProgressListener progressListener = null;
 		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
 		if (callback != null)
@@ -770,12 +772,12 @@ public class StreamApi {
 				}
 			};
 		}
-		okhttp3.Call call = getRecordedAtTimeCall(webId, time, desiredUnits, retrievalMode, selectedFields, timeZone, progressListener, progressRequestListener);
+		okhttp3.Call call = getRecordedAtTimeCall(webId, time, associations, desiredUnits, retrievalMode, selectedFields, timeZone, progressListener, progressRequestListener);
 		apiClient.executeAsync(call, callback);
 		return call;
 	}
 
-	private okhttp3.Call getRecordedAtTimeCall(String webId, String time, String desiredUnits, String retrievalMode, String selectedFields, String timeZone, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+	private okhttp3.Call getRecordedAtTimeCall(String webId, String time, String associations, String desiredUnits, String retrievalMode, String selectedFields, String timeZone, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 		Object localVarPostBody =  null;
 		// verify the required parameter 'webId' is set
 		if (webId == null)
@@ -802,6 +804,8 @@ public class StreamApi {
 		localVarPath = localVarPath.replaceAll("\\{webId\\}", apiClient.escapeString(webId.toString()));
 		if (time != null)
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "time", time));
+		if (associations != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "associations", associations));
 		if (desiredUnits != null)
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "desiredUnits", desiredUnits));
 		if (retrievalMode != null)
@@ -830,8 +834,8 @@ public class StreamApi {
 	 * Retrieves recorded values at the specified times. 
 	 *
 	 */
-	public PITimedValues getRecordedAtTimes(String webId, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone) throws ApiException {
-		ApiResponse<PITimedValues> resp = getRecordedAtTimesWithHttpInfo(webId, desiredUnits, retrievalMode, selectedFields, sortOrder, time, timeZone);
+	public PIExtendedTimedValues getRecordedAtTimes(String webId, String associations, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone) throws ApiException {
+		ApiResponse<PIExtendedTimedValues> resp = getRecordedAtTimesWithHttpInfo(webId, associations, desiredUnits, retrievalMode, selectedFields, sortOrder, time, timeZone);
 		return resp.getData();
 	}
 
@@ -839,9 +843,9 @@ public class StreamApi {
 	 * Retrieves recorded values at the specified times. (with HTTP information)
 	 *
 	 */
-	public ApiResponse<PITimedValues> getRecordedAtTimesWithHttpInfo(String webId, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone) throws ApiException {
-		okhttp3.Call call = getRecordedAtTimesCall(webId, desiredUnits, retrievalMode, selectedFields, sortOrder, time, timeZone,null,null);
-		Type localVarReturnType = new TypeToken<PITimedValues>(){}.getType();
+	public ApiResponse<PIExtendedTimedValues> getRecordedAtTimesWithHttpInfo(String webId, String associations, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone) throws ApiException {
+		okhttp3.Call call = getRecordedAtTimesCall(webId, associations, desiredUnits, retrievalMode, selectedFields, sortOrder, time, timeZone,null,null);
+		Type localVarReturnType = new TypeToken<PIExtendedTimedValues>(){}.getType();
 		return apiClient.execute(call, localVarReturnType);
 	}
 
@@ -849,7 +853,7 @@ public class StreamApi {
 	 * Retrieves recorded values at the specified times. (asynchronously)
 	 *
 	 */
-	public okhttp3.Call getRecordedAtTimesAsync(String webId, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone, final ApiCallback<PITimedValues> callback) throws ApiException {
+	public okhttp3.Call getRecordedAtTimesAsync(String webId, String associations, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone, final ApiCallback<PIExtendedTimedValues> callback) throws ApiException {
 		ProgressResponseBody.ProgressListener progressListener = null;
 		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
 		if (callback != null)
@@ -869,12 +873,12 @@ public class StreamApi {
 				}
 			};
 		}
-		okhttp3.Call call = getRecordedAtTimesCall(webId, desiredUnits, retrievalMode, selectedFields, sortOrder, time, timeZone, progressListener, progressRequestListener);
+		okhttp3.Call call = getRecordedAtTimesCall(webId, associations, desiredUnits, retrievalMode, selectedFields, sortOrder, time, timeZone, progressListener, progressRequestListener);
 		apiClient.executeAsync(call, callback);
 		return call;
 	}
 
-	private okhttp3.Call getRecordedAtTimesCall(String webId, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+	private okhttp3.Call getRecordedAtTimesCall(String webId, String associations, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 		Object localVarPostBody =  null;
 		// verify the required parameter 'webId' is set
 		if (webId == null)
@@ -896,6 +900,8 @@ public class StreamApi {
 		localVarHeaderParams.put("Content-Type", localVarContentType);
 
 		localVarPath = localVarPath.replaceAll("\\{webId\\}", apiClient.escapeString(webId.toString()));
+		if (associations != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "associations", associations));
 		if (desiredUnits != null)
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "desiredUnits", desiredUnits));
 		if (retrievalMode != null)
@@ -1030,6 +1036,96 @@ public class StreamApi {
 		}
 		String[] localVarAuthNames = new String[] {"Basic" };
 		return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+	}
+
+	/**
+	 * Register for stream updates 
+	 *
+	 */
+	public PIStreamUpdatesRegister registerStreamUpdate(String webId, String selectedFields, String webIdType) throws ApiException {
+		ApiResponse<PIStreamUpdatesRegister> resp = registerStreamUpdateWithHttpInfo(webId, selectedFields, webIdType);
+		return resp.getData();
+	}
+
+	/**
+	 * Register for stream updates (with HTTP information)
+	 *
+	 */
+	public ApiResponse<PIStreamUpdatesRegister> registerStreamUpdateWithHttpInfo(String webId, String selectedFields, String webIdType) throws ApiException {
+		okhttp3.Call call = registerStreamUpdateCall(webId, selectedFields, webIdType,null,null);
+		Type localVarReturnType = new TypeToken<PIStreamUpdatesRegister>(){}.getType();
+		return apiClient.execute(call, localVarReturnType);
+	}
+
+	/**
+	 * Register for stream updates (asynchronously)
+	 *
+	 */
+	public okhttp3.Call registerStreamUpdateAsync(String webId, String selectedFields, String webIdType, final ApiCallback<PIStreamUpdatesRegister> callback) throws ApiException {
+		ProgressResponseBody.ProgressListener progressListener = null;
+		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+		if (callback != null)
+		{
+			progressListener = new ProgressResponseBody.ProgressListener() {
+				@Override
+				public void update(long bytesRead, long contentLength, boolean done)
+				{
+					callback.onDownloadProgress(bytesRead, contentLength, done);
+				}
+			};
+			progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+				@Override
+				public void onRequestProgress(long bytesWritten, long contentLength, boolean done)
+				{
+					callback.onUploadProgress(bytesWritten, contentLength, done);
+				}
+			};
+		}
+		okhttp3.Call call = registerStreamUpdateCall(webId, selectedFields, webIdType, progressListener, progressRequestListener);
+		apiClient.executeAsync(call, callback);
+		return call;
+	}
+
+	private okhttp3.Call registerStreamUpdateCall(String webId, String selectedFields, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+		Object localVarPostBody =  null;
+		// verify the required parameter 'webId' is set
+		if (webId == null)
+			throw new ApiException("Missing required parameter 'webId'");
+		String localVarPath = "/streams/{webId}/updates";
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+
+		final String[] localVarAccepts = {"application/json", "text/json", "text/html", "application/x-ms-application"};
+
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+		final String[] localVarContentTypes = {"application/json", "text/json" };
+
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+		localVarHeaderParams.put("Content-Type", localVarContentType);
+
+		localVarPath = localVarPath.replaceAll("\\{webId\\}", apiClient.escapeString(webId.toString()));
+		if (selectedFields != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "selectedFields", selectedFields));
+		if (webIdType != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "webIdType", webIdType));
+		if (progressListener != null)
+		{
+			apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+			@Override
+			public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+				okhttp3.Response originalResponse = chain.proceed(chain.request());
+				return originalResponse.newBuilder()
+				.body(new ProgressResponseBody(originalResponse.body(), progressListener))
+				.build();
+				}
+			});
+		}
+		String[] localVarAuthNames = new String[] {"Basic" };
+		return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
 	}
 
 	/**
@@ -1218,6 +1314,98 @@ public class StreamApi {
 		}
 		String[] localVarAuthNames = new String[] {"Basic" };
 		return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+	}
+
+	/**
+	 * Receive stream updates 
+	 *
+	 */
+	public PIStreamUpdatesRetrieve retrieveStreamUpdate(String marker, String desiredUnits, String selectedFields, String webIdType) throws ApiException {
+		ApiResponse<PIStreamUpdatesRetrieve> resp = retrieveStreamUpdateWithHttpInfo(marker, desiredUnits, selectedFields, webIdType);
+		return resp.getData();
+	}
+
+	/**
+	 * Receive stream updates (with HTTP information)
+	 *
+	 */
+	public ApiResponse<PIStreamUpdatesRetrieve> retrieveStreamUpdateWithHttpInfo(String marker, String desiredUnits, String selectedFields, String webIdType) throws ApiException {
+		okhttp3.Call call = retrieveStreamUpdateCall(marker, desiredUnits, selectedFields, webIdType,null,null);
+		Type localVarReturnType = new TypeToken<PIStreamUpdatesRetrieve>(){}.getType();
+		return apiClient.execute(call, localVarReturnType);
+	}
+
+	/**
+	 * Receive stream updates (asynchronously)
+	 *
+	 */
+	public okhttp3.Call retrieveStreamUpdateAsync(String marker, String desiredUnits, String selectedFields, String webIdType, final ApiCallback<PIStreamUpdatesRetrieve> callback) throws ApiException {
+		ProgressResponseBody.ProgressListener progressListener = null;
+		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+		if (callback != null)
+		{
+			progressListener = new ProgressResponseBody.ProgressListener() {
+				@Override
+				public void update(long bytesRead, long contentLength, boolean done)
+				{
+					callback.onDownloadProgress(bytesRead, contentLength, done);
+				}
+			};
+			progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+				@Override
+				public void onRequestProgress(long bytesWritten, long contentLength, boolean done)
+				{
+					callback.onUploadProgress(bytesWritten, contentLength, done);
+				}
+			};
+		}
+		okhttp3.Call call = retrieveStreamUpdateCall(marker, desiredUnits, selectedFields, webIdType, progressListener, progressRequestListener);
+		apiClient.executeAsync(call, callback);
+		return call;
+	}
+
+	private okhttp3.Call retrieveStreamUpdateCall(String marker, String desiredUnits, String selectedFields, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+		Object localVarPostBody =  null;
+		// verify the required parameter 'marker' is set
+		if (marker == null)
+			throw new ApiException("Missing required parameter 'marker'");
+		String localVarPath = "/streams/updates/{marker}";
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+
+		final String[] localVarAccepts = {"application/json", "text/json", "text/html", "application/x-ms-application"};
+
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+		final String[] localVarContentTypes = {"application/json", "text/json" };
+
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+		localVarHeaderParams.put("Content-Type", localVarContentType);
+
+		localVarPath = localVarPath.replaceAll("\\{marker\\}", apiClient.escapeString(marker.toString()));
+		if (desiredUnits != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "desiredUnits", desiredUnits));
+		if (selectedFields != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "selectedFields", selectedFields));
+		if (webIdType != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "webIdType", webIdType));
+		if (progressListener != null)
+		{
+			apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+			@Override
+			public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+				okhttp3.Response originalResponse = chain.proceed(chain.request());
+				return originalResponse.newBuilder()
+				.body(new ProgressResponseBody(originalResponse.body(), progressListener))
+				.build();
+				}
+			});
+		}
+		String[] localVarAuthNames = new String[] {"Basic" };
+		return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
 	}
 
 }

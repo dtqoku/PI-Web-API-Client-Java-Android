@@ -50,6 +50,9 @@ public class PIAttribute {
 	@SerializedName("DefaultUnitsName")
 	private String defaultUnitsName = null;
 
+	@SerializedName("DisplayDigits")
+	private Integer displayDigits = null;
+
 	@SerializedName("DataReferencePlugIn")
 	private String dataReferencePlugIn = null;
 
@@ -79,6 +82,15 @@ public class PIAttribute {
 
 	@SerializedName("TraitName")
 	private String traitName = null;
+
+	@SerializedName("DefaultUnitsNameAbbreviation")
+	private String defaultUnitsNameAbbreviation = null;
+
+	@SerializedName("Span")
+	private Double span = null;
+
+	@SerializedName("Zero")
+	private Double zero = null;
 
 	@SerializedName("Links")
 	private PIAttributeLinks links = null;
@@ -122,6 +134,10 @@ public class PIAttribute {
 
 	public String getDefaultUnitsName() { return this.defaultUnitsName;}
 
+	public void setDisplayDigits(Integer displayDigits) { this.displayDigits = displayDigits;}
+
+	public Integer getDisplayDigits() { return this.displayDigits;}
+
 	public void setDataReferencePlugIn(String dataReferencePlugIn) { this.dataReferencePlugIn = dataReferencePlugIn;}
 
 	public String getDataReferencePlugIn() { return this.dataReferencePlugIn;}
@@ -161,6 +177,18 @@ public class PIAttribute {
 	public void setTraitName(String traitName) { this.traitName = traitName;}
 
 	public String getTraitName() { return this.traitName;}
+
+	public void setDefaultUnitsNameAbbreviation(String defaultUnitsNameAbbreviation) { this.defaultUnitsNameAbbreviation = defaultUnitsNameAbbreviation;}
+
+	public String getDefaultUnitsNameAbbreviation() { return this.defaultUnitsNameAbbreviation;}
+
+	public void setSpan(Double span) { this.span = span;}
+
+	public Double getSpan() { return this.span;}
+
+	public void setZero(Double zero) { this.zero = zero;}
+
+	public Double getZero() { return this.zero;}
 
 	public void setLinks(PIAttributeLinks links) { this.links = links;}
 

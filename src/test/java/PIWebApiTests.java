@@ -180,6 +180,54 @@ public class PIWebApiTests {
     }
 
     @Test
+    public void testStreamUpdates() throws Exception {
+        PIWebApiClient client = generatePIWebApiInstance();
+        try {
+
+            PIPoint point1 = client.getPoint().getByPath("\\\\MARC-PI2016\\sinusoid", null,null);
+            PIPoint point2 = client.getPoint().getByPath("\\\\MARC-PI2016\\sinusoidu", null,null);
+            PIPoint point3 = client.getPoint().getByPath("\\\\MARC-PI2016\\cdt158", null,null);
+            List<String> webIds = new ArrayList<String>();
+            webIds.add(point1.getWebId());
+            webIds.add(point2.getWebId());
+            webIds.add(point3.getWebId());
+
+            List<String> eventsString= new ArrayList<String>();
+
+            PIItemsStreamUpdatesRegister piItemsStreamUpdatesRegister = client.getStreamSet().registerStreamSetUpdates(webIds, null, null);
+            List<String> markers = new ArrayList<String>();
+            for(PIStreamUpdatesRegister piStreamUpdatesRegister : piItemsStreamUpdatesRegister.getItems())
+            {
+                markers.add(piStreamUpdatesRegister.getLatestMarker());
+            }
+            int k = 3;
+            while (k > 0)
+            {
+                PIItemsStreamUpdatesRetrieve piItemsStreamUpdatesRetrieve = client.getStreamSet().retrieveStreamSetUpdates(markers, null, null);
+                markers = new ArrayList<String>();
+                for(PIStreamUpdatesRetrieve piStreamUpdatesRetrieve : piItemsStreamUpdatesRetrieve.getItems())
+                {
+                    markers.add(piStreamUpdatesRetrieve.getLatestMarker());
+                }
+                for(PIStreamUpdatesRetrieve item : piItemsStreamUpdatesRetrieve.getItems())
+                {
+                    for(PIDataPipeEvent piEvent : item.getEvents())
+                    {
+                        eventsString.add(piEvent.getValue().toString());
+                    }
+                }
+                Thread.sleep(30000);
+                k--;
+            }
+            assertEquals(eventsString.size() > 0, true);
+        }
+        catch (ApiException ex)
+        {
+            throw new Exception(ex);
+        }
+    }
+
+    @Test
     public void testGetElementByPath() throws Exception {
         PIWebApiClient client = generatePIWebApiInstance();
         try {
@@ -199,7 +247,7 @@ public class PIWebApiTests {
 
             PIElement myElement = client.getElement().getByPath("\\\\MARC-PI2016\\CrossPlatformLab\\marc.adm", null,null);
 
-            PIItemsAttribute attributes = client.getElement().getAttributes(myElement.getWebId(), null, 1000, null, false, null, null,null,null,null,0,null,null, null);
+            PIItemsAttribute attributes = client.getElement().getAttributes(myElement.getWebId(), null, 1000, null, false, null, false,false, null,null,0,null,null, null, null,null);
             assertEquals ( attributes.getItems().size() > 0,true);
 
         }
@@ -270,12 +318,8 @@ public class PIWebApiTests {
         WebIdInfo webIdInfo4 = client.getWebIdHelper().getWebIdInfo(point.getWebId());
         WebIdInfo webIdInfo3 = client.getWebIdHelper().getWebIdInfo(dataServer.getWebId());
 
-        String path = "\\\\PISRV1\\CDF144_Repeated24h_forward";
         String web_id1 = client.getWebIdHelper().generateWebIdByPath("\\\\PISRV1\\CDF144_Repeated24h_forward", PIPoint.class, null);
-
-        String web_id2 = client.getWebIdHelper().generateWebIdByPath(
-                "\\\\PISRV1\\Universities\\UC Davis\\Buildings\\Academic Surge Building|Electricity Totalizer",
-                PIAttribute.class, PIElement.class);
+        String web_id2 = client.getWebIdHelper().generateWebIdByPath("\\\\PISRV1\\Universities\\UC Davis\\Buildings\\Academic Surge Building|Electricity Totalizer", PIAttribute.class, PIElement.class);
     }
 
     @Test

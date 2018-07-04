@@ -847,7 +847,7 @@ public class EventFrameApi {
 	}
 
 	/**
-	 * Delete an annotation on an event frame. 
+	 * Delete an annotation on an event frame. If the annotation has attached media, the attached media will also be deleted. 
 	 *
 	 */
 	public void deleteAnnotation(String id, String webId) throws ApiException {
@@ -855,7 +855,7 @@ public class EventFrameApi {
 	}
 
 	/**
-	 * Delete an annotation on an event frame. (with HTTP information)
+	 * Delete an annotation on an event frame. If the annotation has attached media, the attached media will also be deleted. (with HTTP information)
 	 *
 	 */
 	public ApiResponse<Void> deleteAnnotationWithHttpInfo(String id, String webId) throws ApiException {
@@ -864,7 +864,7 @@ public class EventFrameApi {
 	}
 
 	/**
-	 * Delete an annotation on an event frame. (asynchronously)
+	 * Delete an annotation on an event frame. If the annotation has attached media, the attached media will also be deleted. (asynchronously)
 	 *
 	 */
 	public okhttp3.Call deleteAnnotationAsync(String id, String webId, final ApiCallback<Void> callback) throws ApiException {
@@ -935,29 +935,27 @@ public class EventFrameApi {
 	}
 
 	/**
-	 * Get the attributes of the specified event frame. 
+	 * Delete attached media from an annotation on an event frame. 
 	 *
 	 */
-	public PIItemsAttribute getAttributes(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType) throws ApiException {
-		ApiResponse<PIItemsAttribute> resp = getAttributesWithHttpInfo(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, webIdType);
-		return resp.getData();
+	public void deleteAnnotationAttachmentMediaById(String id, String webId) throws ApiException {
+		deleteAnnotationAttachmentMediaByIdWithHttpInfo(id, webId);
 	}
 
 	/**
-	 * Get the attributes of the specified event frame. (with HTTP information)
+	 * Delete attached media from an annotation on an event frame. (with HTTP information)
 	 *
 	 */
-	public ApiResponse<PIItemsAttribute> getAttributesWithHttpInfo(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType) throws ApiException {
-		okhttp3.Call call = getAttributesCall(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, webIdType,null,null);
-		Type localVarReturnType = new TypeToken<PIItemsAttribute>(){}.getType();
-		return apiClient.execute(call, localVarReturnType);
+	public ApiResponse<Void> deleteAnnotationAttachmentMediaByIdWithHttpInfo(String id, String webId) throws ApiException {
+		okhttp3.Call call = deleteAnnotationAttachmentMediaByIdCall(id, webId,null,null);
+		return apiClient.execute(call);
 	}
 
 	/**
-	 * Get the attributes of the specified event frame. (asynchronously)
+	 * Delete attached media from an annotation on an event frame. (asynchronously)
 	 *
 	 */
-	public okhttp3.Call getAttributesAsync(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType, final ApiCallback<PIItemsAttribute> callback) throws ApiException {
+	public okhttp3.Call deleteAnnotationAttachmentMediaByIdAsync(String id, String webId, final ApiCallback<Void> callback) throws ApiException {
 		ProgressResponseBody.ProgressListener progressListener = null;
 		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
 		if (callback != null)
@@ -977,12 +975,196 @@ public class EventFrameApi {
 				}
 			};
 		}
-		okhttp3.Call call = getAttributesCall(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, webIdType, progressListener, progressRequestListener);
+		okhttp3.Call call = deleteAnnotationAttachmentMediaByIdCall(id, webId, progressListener, progressRequestListener);
 		apiClient.executeAsync(call, callback);
 		return call;
 	}
 
-	private okhttp3.Call getAttributesCall(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+	private okhttp3.Call deleteAnnotationAttachmentMediaByIdCall(String id, String webId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+		Object localVarPostBody =  null;
+		// verify the required parameter 'id' is set
+		if (id == null)
+			throw new ApiException("Missing required parameter 'id'");
+		// verify the required parameter 'webId' is set
+		if (webId == null)
+			throw new ApiException("Missing required parameter 'webId'");
+		String localVarPath = "/eventframes/{webId}/annotations/{id}/attachment/media";
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+
+		final String[] localVarAccepts = {"application/json", "text/json", "text/html", "application/x-ms-application"};
+
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+		final String[] localVarContentTypes = {"application/json", "text/json" };
+
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+		localVarHeaderParams.put("Content-Type", localVarContentType);
+
+		localVarPath = localVarPath.replaceAll("\\{id\\}", apiClient.escapeString(id.toString()));
+		localVarPath = localVarPath.replaceAll("\\{webId\\}", apiClient.escapeString(webId.toString()));
+		if (progressListener != null)
+		{
+			apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+			@Override
+			public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+				okhttp3.Response originalResponse = chain.proceed(chain.request());
+				return originalResponse.newBuilder()
+				.body(new ProgressResponseBody(originalResponse.body(), progressListener))
+				.build();
+				}
+			});
+		}
+		String[] localVarAuthNames = new String[] {"Basic" };
+		return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+	}
+
+	/**
+	 * Gets the metadata of the media attached to the specified annotation. 
+	 *
+	 */
+	public PIMediaMetadata getAnnotationAttachmentMediaMetadataById(String id, String webId, String selectedFields, String webIdType) throws ApiException {
+		ApiResponse<PIMediaMetadata> resp = getAnnotationAttachmentMediaMetadataByIdWithHttpInfo(id, webId, selectedFields, webIdType);
+		return resp.getData();
+	}
+
+	/**
+	 * Gets the metadata of the media attached to the specified annotation. (with HTTP information)
+	 *
+	 */
+	public ApiResponse<PIMediaMetadata> getAnnotationAttachmentMediaMetadataByIdWithHttpInfo(String id, String webId, String selectedFields, String webIdType) throws ApiException {
+		okhttp3.Call call = getAnnotationAttachmentMediaMetadataByIdCall(id, webId, selectedFields, webIdType,null,null);
+		Type localVarReturnType = new TypeToken<PIMediaMetadata>(){}.getType();
+		return apiClient.execute(call, localVarReturnType);
+	}
+
+	/**
+	 * Gets the metadata of the media attached to the specified annotation. (asynchronously)
+	 *
+	 */
+	public okhttp3.Call getAnnotationAttachmentMediaMetadataByIdAsync(String id, String webId, String selectedFields, String webIdType, final ApiCallback<PIMediaMetadata> callback) throws ApiException {
+		ProgressResponseBody.ProgressListener progressListener = null;
+		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+		if (callback != null)
+		{
+			progressListener = new ProgressResponseBody.ProgressListener() {
+				@Override
+				public void update(long bytesRead, long contentLength, boolean done)
+				{
+					callback.onDownloadProgress(bytesRead, contentLength, done);
+				}
+			};
+			progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+				@Override
+				public void onRequestProgress(long bytesWritten, long contentLength, boolean done)
+				{
+					callback.onUploadProgress(bytesWritten, contentLength, done);
+				}
+			};
+		}
+		okhttp3.Call call = getAnnotationAttachmentMediaMetadataByIdCall(id, webId, selectedFields, webIdType, progressListener, progressRequestListener);
+		apiClient.executeAsync(call, callback);
+		return call;
+	}
+
+	private okhttp3.Call getAnnotationAttachmentMediaMetadataByIdCall(String id, String webId, String selectedFields, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+		Object localVarPostBody =  null;
+		// verify the required parameter 'id' is set
+		if (id == null)
+			throw new ApiException("Missing required parameter 'id'");
+		// verify the required parameter 'webId' is set
+		if (webId == null)
+			throw new ApiException("Missing required parameter 'webId'");
+		String localVarPath = "/eventframes/{webId}/annotations/{id}/attachment/media/metadata";
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+
+		final String[] localVarAccepts = {"application/json", "text/json", "text/html", "application/x-ms-application"};
+
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+		final String[] localVarContentTypes = {"application/json", "text/json" };
+
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+		localVarHeaderParams.put("Content-Type", localVarContentType);
+
+		localVarPath = localVarPath.replaceAll("\\{id\\}", apiClient.escapeString(id.toString()));
+		localVarPath = localVarPath.replaceAll("\\{webId\\}", apiClient.escapeString(webId.toString()));
+		if (selectedFields != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "selectedFields", selectedFields));
+		if (webIdType != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "webIdType", webIdType));
+		if (progressListener != null)
+		{
+			apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+			@Override
+			public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+				okhttp3.Response originalResponse = chain.proceed(chain.request());
+				return originalResponse.newBuilder()
+				.body(new ProgressResponseBody(originalResponse.body(), progressListener))
+				.build();
+				}
+			});
+		}
+		String[] localVarAuthNames = new String[] {"Basic" };
+		return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+	}
+
+	/**
+	 * Get the attributes of the specified event frame. 
+	 *
+	 */
+	public PIItemsAttribute getAttributes(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType) throws ApiException {
+		ApiResponse<PIItemsAttribute> resp = getAttributesWithHttpInfo(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, trait, traitCategory, valueType, webIdType);
+		return resp.getData();
+	}
+
+	/**
+	 * Get the attributes of the specified event frame. (with HTTP information)
+	 *
+	 */
+	public ApiResponse<PIItemsAttribute> getAttributesWithHttpInfo(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType) throws ApiException {
+		okhttp3.Call call = getAttributesCall(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, trait, traitCategory, valueType, webIdType,null,null);
+		Type localVarReturnType = new TypeToken<PIItemsAttribute>(){}.getType();
+		return apiClient.execute(call, localVarReturnType);
+	}
+
+	/**
+	 * Get the attributes of the specified event frame. (asynchronously)
+	 *
+	 */
+	public okhttp3.Call getAttributesAsync(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType, final ApiCallback<PIItemsAttribute> callback) throws ApiException {
+		ProgressResponseBody.ProgressListener progressListener = null;
+		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+		if (callback != null)
+		{
+			progressListener = new ProgressResponseBody.ProgressListener() {
+				@Override
+				public void update(long bytesRead, long contentLength, boolean done)
+				{
+					callback.onDownloadProgress(bytesRead, contentLength, done);
+				}
+			};
+			progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+				@Override
+				public void onRequestProgress(long bytesWritten, long contentLength, boolean done)
+				{
+					callback.onUploadProgress(bytesWritten, contentLength, done);
+				}
+			};
+		}
+		okhttp3.Call call = getAttributesCall(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, trait, traitCategory, valueType, webIdType, progressListener, progressRequestListener);
+		apiClient.executeAsync(call, callback);
+		return call;
+	}
+
+	private okhttp3.Call getAttributesCall(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 		Object localVarPostBody =  null;
 		// verify the required parameter 'webId' is set
 		if (webId == null)
@@ -1026,6 +1208,10 @@ public class EventFrameApi {
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "startIndex", startIndex));
 		if (templateName != null)
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "templateName", templateName));
+		if (trait != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "trait", trait));
+		if (traitCategory != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "traitCategory", traitCategory));
 		if (valueType != null)
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "valueType", valueType));
 		if (webIdType != null)

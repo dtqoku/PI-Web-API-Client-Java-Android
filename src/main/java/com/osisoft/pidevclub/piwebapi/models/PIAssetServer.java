@@ -47,6 +47,9 @@ public class PIAssetServer {
 	@SerializedName("ServerVersion")
 	private String serverVersion = null;
 
+	@SerializedName("ServerTime")
+	private String serverTime = null;
+
 	@SerializedName("ExtendedProperties")
 	private Map<String, PIValue> extendedProperties = null;
 
@@ -87,6 +90,10 @@ public class PIAssetServer {
 	public void setServerVersion(String serverVersion) { this.serverVersion = serverVersion;}
 
 	public String getServerVersion() { return this.serverVersion;}
+
+	public void setServerTime(String serverTime) { this.serverTime = serverTime;}
+
+	public String getServerTime() { return this.serverTime;}
 
 	public void setExtendedProperties(Map<String, PIValue> extendedProperties) { this.extendedProperties = extendedProperties;}
 

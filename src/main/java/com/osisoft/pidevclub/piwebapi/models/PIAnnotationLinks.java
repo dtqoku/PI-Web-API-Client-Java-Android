@@ -32,6 +32,12 @@ public class PIAnnotationLinks {
 	@SerializedName("Owner")
 	private String owner = null;
 
+	@SerializedName("MediaData")
+	private String mediaData = null;
+
+	@SerializedName("MediaMetadata")
+	private String mediaMetadata = null;
+
 	public PIAnnotationLinks() {
 	}
 
@@ -43,4 +49,12 @@ public class PIAnnotationLinks {
 	public void setOwner(String owner) { this.owner = owner;}
 
 	public String getOwner() { return this.owner;}
+
+	public void setMediaData(String mediaData) { this.mediaData = mediaData;}
+
+	public String getMediaData() { return this.mediaData;}
+
+	public void setMediaMetadata(String mediaMetadata) { this.mediaMetadata = mediaMetadata;}
+
+	public String getMediaMetadata() { return this.mediaMetadata;}
 }

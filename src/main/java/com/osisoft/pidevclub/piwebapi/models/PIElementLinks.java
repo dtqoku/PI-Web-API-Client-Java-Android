@@ -80,6 +80,9 @@ public class PIElementLinks {
 	@SerializedName("SecurityEntries")
 	private String securityEntries = null;
 
+	@SerializedName("NotificationRules")
+	private String notificationRules = null;
+
 	public PIElementLinks() {
 	}
 
@@ -155,4 +158,8 @@ public class PIElementLinks {
 	public void setSecurityEntries(String securityEntries) { this.securityEntries = securityEntries;}
 
 	public String getSecurityEntries() { return this.securityEntries;}
+
+	public void setNotificationRules(String notificationRules) { this.notificationRules = notificationRules;}
+
+	public String getNotificationRules() { return this.notificationRules;}
 }

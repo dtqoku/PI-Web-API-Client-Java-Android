@@ -16,6 +16,8 @@ Method | HTTP request | Description
 [**getElements**](ElementApi.md#getelements) | **GET** /elements/{webId}/elements | Retrieve elements based on the specified conditions. By default, this method selects immediate children of the specified element.
 [**createElement**](ElementApi.md#createelement) | **POST** /elements/{webId}/elements | Create a child element.
 [**getEventFrames**](ElementApi.md#geteventframes) | **GET** /elements/{webId}/eventframes | Retrieve event frames that reference this element based on the specified conditions. By default, returns all event frames that reference this element that have been active in the past 8 hours.
+[**getNotificationRules**](ElementApi.md#getnotificationrules) | **GET** /elements/{webId}/notificationrules | Retrieve notification rules for an element
+[**getPaths**](ElementApi.md#getpaths) | **GET** /elements/{webId}/paths | Get a list of the full or relative paths to this element.
 [**getReferencedElements**](ElementApi.md#getreferencedelements) | **GET** /elements/{webId}/referencedelements | Retrieve referenced elements based on the specified conditions. By default, this method selects all referenced elements of the current resource.
 [**addReferencedElement**](ElementApi.md#addreferencedelement) | **POST** /elements/{webId}/referencedelements | Add a reference to an existing element to the child elements collection.
 [**removeReferencedElement**](ElementApi.md#removereferencedelement) | **DELETE** /elements/{webId}/referencedelements | Remove a reference to an existing element from the child elements collection.
@@ -153,7 +155,7 @@ Name | Type | Description | Notes
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getAttributes**
-> getAttributes(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType)
+> getAttributes(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType)
 
 Get the attributes of the specified element.
 
@@ -173,6 +175,8 @@ Name | Type | Description | Notes
  **sortOrder** | **String**| The order that the returned collection is sorted. The default is 'Ascending'.. | [optional]
  **startIndex** | **Integer**| The starting index (zero based) of the items to be returned. The default is 0.. | [optional]
  **templateName** | **String**| Specify that returned attributes must be members of this template. The default is no template filter.. | [optional]
+ **trait** | **List<String>**| The name of the attribute trait. Multiple traits may be specified with multiple instances of the parameter.. | [optional]
+ **traitCategory** | **List<String>**| The category of the attribute traits. Multiple categories may be specified with multiple instances of the parameter. If the parameter is not specified, or if its value is "all", then all attribute traits of all categories will be returned.. | [optional]
  **valueType** | **String**| Specify that returned attributes' value type must be the given value type. The default is no value type filter.. | [optional]
  **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
@@ -351,6 +355,45 @@ Name | Type | Description | Notes
  **startTime** | **String**| The starting time for the search. startTime must be less than or equal to the endTime. The searchMode parameter will control whether the comparison will be performed against the event frame's startTime or endTime. The default is '*-8h'.. | [optional]
  **templateName** | **String**| Specify that returned event frames must have this template or a template derived from this template. The default is no template filter. Specify this parameter by name.. | [optional]
  **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
+
+
+### Return type
+
+
+
+[[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
+
+# **getNotificationRules**
+> getNotificationRules(String webId, String selectedFields, String webIdType)
+
+Retrieve notification rules for an element
+
+### Parameters
+
+Name | Type | Description | Notes
+------------- | ------------- | ------------- | -------------
+ **webId** | **String**| The ID of the resource to use as the root of the search.. | [required]
+ **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
+
+
+### Return type
+
+
+
+[[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
+
+# **getPaths**
+> getPaths(String webId, String relativePath)
+
+Get a list of the full or relative paths to this element.
+
+### Parameters
+
+Name | Type | Description | Notes
+------------- | ------------- | ------------- | -------------
+ **webId** | **String**| The ID of the element.. | [required]
+ **relativePath** | **String**| The full path in ShortName format to the parent object that the returned paths should be relative. For example, "\\Server1\Database2" would return all the paths to the element relative to the database. A path of "\\Server1\Database2\RootElement" would return all paths to the element relative to "RootElement". If null, then all the full paths to the element will be returned.. | [optional]
 
 
 ### Return type

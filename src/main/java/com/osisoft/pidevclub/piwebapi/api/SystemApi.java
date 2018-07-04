@@ -208,7 +208,7 @@ public class SystemApi {
 	}
 
 	/**
-	 * Get the system uptime, the system state and the number of cache instances for this PI System Web API instance. 
+	 * Get information about this PI Web API instance. Examples of information returned include the system uptime, the number of cache instances for this PI System Web API instance, and the system run state. 
 	 *
 	 */
 	public PISystemStatus status() throws ApiException {
@@ -217,7 +217,7 @@ public class SystemApi {
 	}
 
 	/**
-	 * Get the system uptime, the system state and the number of cache instances for this PI System Web API instance. (with HTTP information)
+	 * Get information about this PI Web API instance. Examples of information returned include the system uptime, the number of cache instances for this PI System Web API instance, and the system run state. (with HTTP information)
 	 *
 	 */
 	public ApiResponse<PISystemStatus> statusWithHttpInfo() throws ApiException {
@@ -227,7 +227,7 @@ public class SystemApi {
 	}
 
 	/**
-	 * Get the system uptime, the system state and the number of cache instances for this PI System Web API instance. (asynchronously)
+	 * Get information about this PI Web API instance. Examples of information returned include the system uptime, the number of cache instances for this PI System Web API instance, and the system run state. (asynchronously)
 	 *
 	 */
 	public okhttp3.Call statusAsync(final ApiCallback<PISystemStatus> callback) throws ApiException {

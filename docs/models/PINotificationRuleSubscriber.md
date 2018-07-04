@@ -1,0 +1,22 @@
+# PINotificationRuleSubscriber
+
+## Properties
+Name | Type | Notes
+------------ | ------------- | -------------
+**WebId** | **String**
+**Id** | **String**
+**Name** | **String**
+**Description** | **String**
+**Path** | **String**
+**ConfigString** | **String**
+**ContactTemplateName** | **String**
+**ContactType** | **String**
+**DeliveryFormatName** | **String**
+**PlugInName** | **String**
+**EscalationTimeout** | **String**
+**MaximumRetries** | **Integer**
+**NotifyOption** | **String**
+**RetryInterval** | **String**
+**WebException** | **[**PIWebException**](../models/PIWebException.md)**
+
+[[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)

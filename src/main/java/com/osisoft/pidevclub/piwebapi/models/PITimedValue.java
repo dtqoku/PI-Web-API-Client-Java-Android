@@ -41,6 +41,9 @@ public class PITimedValue {
 	@SerializedName("Substituted")
 	private Boolean substituted = null;
 
+	@SerializedName("Annotated")
+	private Boolean annotated = null;
+
 	@SerializedName("Value")
 	private Object value = null;
 
@@ -73,6 +76,10 @@ public class PITimedValue {
 	public void setSubstituted(Boolean substituted) { this.substituted = substituted;}
 
 	public Boolean getSubstituted() { return this.substituted;}
+
+	public void setAnnotated(Boolean annotated) { this.annotated = annotated;}
+
+	public Boolean getAnnotated() { return this.annotated;}
 
 	public void setValue(Object value) { this.value = value;}
 

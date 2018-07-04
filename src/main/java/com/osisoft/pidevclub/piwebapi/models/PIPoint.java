@@ -50,6 +50,12 @@ public class PIPoint {
 	@SerializedName("DigitalSetName")
 	private String digitalSetName = null;
 
+	@SerializedName("Span")
+	private Double span = null;
+
+	@SerializedName("Zero")
+	private Double zero = null;
+
 	@SerializedName("EngineeringUnits")
 	private String engineeringUnits = null;
 
@@ -58,6 +64,9 @@ public class PIPoint {
 
 	@SerializedName("Future")
 	private Boolean future = null;
+
+	@SerializedName("DisplayDigits")
+	private Integer displayDigits = null;
 
 	@SerializedName("Links")
 	private PIPointLinks links = null;
@@ -101,6 +110,14 @@ public class PIPoint {
 
 	public String getDigitalSetName() { return this.digitalSetName;}
 
+	public void setSpan(Double span) { this.span = span;}
+
+	public Double getSpan() { return this.span;}
+
+	public void setZero(Double zero) { this.zero = zero;}
+
+	public Double getZero() { return this.zero;}
+
 	public void setEngineeringUnits(String engineeringUnits) { this.engineeringUnits = engineeringUnits;}
 
 	public String getEngineeringUnits() { return this.engineeringUnits;}
@@ -112,6 +129,10 @@ public class PIPoint {
 	public void setFuture(Boolean future) { this.future = future;}
 
 	public Boolean getFuture() { return this.future;}
+
+	public void setDisplayDigits(Integer displayDigits) { this.displayDigits = displayDigits;}
+
+	public Integer getDisplayDigits() { return this.displayDigits;}
 
 	public void setLinks(PIPointLinks links) { this.links = links;}
 

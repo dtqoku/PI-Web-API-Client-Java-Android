@@ -2387,6 +2387,188 @@ public class StreamSetApi {
 	}
 
 	/**
+	 * Receive stream updates 
+	 *
+	 */
+	public PIItemsStreamUpdatesRetrieve retrieveStreamSetUpdates(List<String> marker, String selectedFields, String webIdType) throws ApiException {
+		ApiResponse<PIItemsStreamUpdatesRetrieve> resp = retrieveStreamSetUpdatesWithHttpInfo(marker, selectedFields, webIdType);
+		return resp.getData();
+	}
+
+	/**
+	 * Receive stream updates (with HTTP information)
+	 *
+	 */
+	public ApiResponse<PIItemsStreamUpdatesRetrieve> retrieveStreamSetUpdatesWithHttpInfo(List<String> marker, String selectedFields, String webIdType) throws ApiException {
+		okhttp3.Call call = retrieveStreamSetUpdatesCall(marker, selectedFields, webIdType,null,null);
+		Type localVarReturnType = new TypeToken<PIItemsStreamUpdatesRetrieve>(){}.getType();
+		return apiClient.execute(call, localVarReturnType);
+	}
+
+	/**
+	 * Receive stream updates (asynchronously)
+	 *
+	 */
+	public okhttp3.Call retrieveStreamSetUpdatesAsync(List<String> marker, String selectedFields, String webIdType, final ApiCallback<PIItemsStreamUpdatesRetrieve> callback) throws ApiException {
+		ProgressResponseBody.ProgressListener progressListener = null;
+		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+		if (callback != null)
+		{
+			progressListener = new ProgressResponseBody.ProgressListener() {
+				@Override
+				public void update(long bytesRead, long contentLength, boolean done)
+				{
+					callback.onDownloadProgress(bytesRead, contentLength, done);
+				}
+			};
+			progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+				@Override
+				public void onRequestProgress(long bytesWritten, long contentLength, boolean done)
+				{
+					callback.onUploadProgress(bytesWritten, contentLength, done);
+				}
+			};
+		}
+		okhttp3.Call call = retrieveStreamSetUpdatesCall(marker, selectedFields, webIdType, progressListener, progressRequestListener);
+		apiClient.executeAsync(call, callback);
+		return call;
+	}
+
+	private okhttp3.Call retrieveStreamSetUpdatesCall(List<String> marker, String selectedFields, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+		Object localVarPostBody =  null;
+		// verify the required parameter 'marker' is set
+		if (marker == null)
+			throw new ApiException("Missing required parameter 'marker'");
+		String localVarPath = "/streamsets/updates";
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+
+		final String[] localVarAccepts = {"application/json", "text/json", "text/html", "application/x-ms-application"};
+
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+		final String[] localVarContentTypes = {"application/json", "text/json" };
+
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+		localVarHeaderParams.put("Content-Type", localVarContentType);
+
+		if (marker != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "marker", marker));
+		if (selectedFields != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "selectedFields", selectedFields));
+		if (webIdType != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "webIdType", webIdType));
+		if (progressListener != null)
+		{
+			apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+			@Override
+			public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+				okhttp3.Response originalResponse = chain.proceed(chain.request());
+				return originalResponse.newBuilder()
+				.body(new ProgressResponseBody(originalResponse.body(), progressListener))
+				.build();
+				}
+			});
+		}
+		String[] localVarAuthNames = new String[] {"Basic" };
+		return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+	}
+
+	/**
+	 * Register for stream updates 
+	 *
+	 */
+	public PIItemsStreamUpdatesRegister registerStreamSetUpdates(List<String> webId, String selectedFields, String webIdType) throws ApiException {
+		ApiResponse<PIItemsStreamUpdatesRegister> resp = registerStreamSetUpdatesWithHttpInfo(webId, selectedFields, webIdType);
+		return resp.getData();
+	}
+
+	/**
+	 * Register for stream updates (with HTTP information)
+	 *
+	 */
+	public ApiResponse<PIItemsStreamUpdatesRegister> registerStreamSetUpdatesWithHttpInfo(List<String> webId, String selectedFields, String webIdType) throws ApiException {
+		okhttp3.Call call = registerStreamSetUpdatesCall(webId, selectedFields, webIdType,null,null);
+		Type localVarReturnType = new TypeToken<PIItemsStreamUpdatesRegister>(){}.getType();
+		return apiClient.execute(call, localVarReturnType);
+	}
+
+	/**
+	 * Register for stream updates (asynchronously)
+	 *
+	 */
+	public okhttp3.Call registerStreamSetUpdatesAsync(List<String> webId, String selectedFields, String webIdType, final ApiCallback<PIItemsStreamUpdatesRegister> callback) throws ApiException {
+		ProgressResponseBody.ProgressListener progressListener = null;
+		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+		if (callback != null)
+		{
+			progressListener = new ProgressResponseBody.ProgressListener() {
+				@Override
+				public void update(long bytesRead, long contentLength, boolean done)
+				{
+					callback.onDownloadProgress(bytesRead, contentLength, done);
+				}
+			};
+			progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+				@Override
+				public void onRequestProgress(long bytesWritten, long contentLength, boolean done)
+				{
+					callback.onUploadProgress(bytesWritten, contentLength, done);
+				}
+			};
+		}
+		okhttp3.Call call = registerStreamSetUpdatesCall(webId, selectedFields, webIdType, progressListener, progressRequestListener);
+		apiClient.executeAsync(call, callback);
+		return call;
+	}
+
+	private okhttp3.Call registerStreamSetUpdatesCall(List<String> webId, String selectedFields, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+		Object localVarPostBody =  null;
+		// verify the required parameter 'webId' is set
+		if (webId == null)
+			throw new ApiException("Missing required parameter 'webId'");
+		String localVarPath = "/streamsets/updates";
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+
+		final String[] localVarAccepts = {"application/json", "text/json", "text/html", "application/x-ms-application"};
+
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+		final String[] localVarContentTypes = {"application/json", "text/json" };
+
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+		localVarHeaderParams.put("Content-Type", localVarContentType);
+
+		if (webId != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "webId", webId));
+		if (selectedFields != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "selectedFields", selectedFields));
+		if (webIdType != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "webIdType", webIdType));
+		if (progressListener != null)
+		{
+			apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+			@Override
+			public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+				okhttp3.Response originalResponse = chain.proceed(chain.request());
+				return originalResponse.newBuilder()
+				.body(new ProgressResponseBody(originalResponse.body(), progressListener))
+				.build();
+				}
+			});
+		}
+		String[] localVarAuthNames = new String[] {"Basic" };
+		return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+	}
+
+	/**
 	 * Returns values of the specified streams. 
 	 *
 	 */

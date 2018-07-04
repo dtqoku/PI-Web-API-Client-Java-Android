@@ -12,8 +12,10 @@ Method | HTTP request | Description
 [**getRecordedAtTime**](StreamApi.md#getrecordedattime) | **GET** /streams/{webId}/recordedattime | Returns a single recorded value based on the passed time and retrieval mode from the stream.
 [**getRecordedAtTimes**](StreamApi.md#getrecordedattimes) | **GET** /streams/{webId}/recordedattimes | Retrieves recorded values at the specified times.
 [**getSummary**](StreamApi.md#getsummary) | **GET** /streams/{webId}/summary | Returns a summary over the specified time range for the stream.
+[**registerStreamUpdate**](StreamApi.md#registerstreamupdate) | **POST** /streams/{webId}/updates | Register for stream updates
 [**getValue**](StreamApi.md#getvalue) | **GET** /streams/{webId}/value | Returns the value of the stream at the specified time. By default, this is usually the current value.
 [**updateValue**](StreamApi.md#updatevalue) | **POST** /streams/{webId}/value | Updates a value for the specified stream.
+[**retrieveStreamUpdate**](StreamApi.md#retrievestreamupdate) | **GET** /streams/updates/{marker} | Receive stream updates
 
 
 # **getChannel**
@@ -135,7 +137,7 @@ Name | Type | Description | Notes
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getRecorded**
-> getRecorded(String webId, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone)
+> getRecorded(String webId, String associations, String boundaryType, String desiredUnits, String endTime, String filterExpression, Boolean includeFilteredValues, Integer maxCount, String selectedFields, String startTime, String timeZone)
 
 Returns a list of compressed values for the requested time range from the source provider.
 
@@ -144,6 +146,7 @@ Returns a list of compressed values for the requested time range from the source
 Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **String**| The ID of the stream.. | [required]
+ **associations** | **String**| Associated values to return in the response, separated by semicolons (;). This call supports Annotations to return events with annotation values. If this parameter is not specified, annotation values are not returned.. | [optional]
  **boundaryType** | **String**| An optional value that determines how the times and values of the returned end points are determined. The default is 'Inside'.. | [optional]
  **desiredUnits** | **String**| The name or abbreviation of the desired units of measure for the returned value, as found in the UOM database associated with the attribute. If not specified for an attribute, the attribute's default unit of measure is used. If the underlying stream is a point, this value may not be specified, as points are not associated with a unit of measure.. | [optional]
  **endTime** | **String**| An optional end time. The default is '*' for element attributes and points. For event frame attributes, the default is the event frame's end time, or '*' if that is not set. Note that if endTime is earlier than startTime, the resulting values will be in time-descending order.. | [optional]
@@ -183,7 +186,7 @@ Name | Type | Description | Notes
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getRecordedAtTime**
-> getRecordedAtTime(String webId, String time, String desiredUnits, String retrievalMode, String selectedFields, String timeZone)
+> getRecordedAtTime(String webId, String time, String associations, String desiredUnits, String retrievalMode, String selectedFields, String timeZone)
 
 Returns a single recorded value based on the passed time and retrieval mode from the stream.
 
@@ -193,6 +196,7 @@ Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **String**| The ID of the stream.. | [required]
  **time** | **String**| The timestamp at which the value is desired.. | [required]
+ **associations** | **String**| Associated values to return in the response, separated by semicolons (;). This call supports Annotations to return events with annotation values. If this parameter is not specified, annotation values are not returned.. | [optional]
  **desiredUnits** | **String**| The name or abbreviation of the desired units of measure for the returned value, as found in the UOM database associated with the attribute. If not specified for an attribute, the attribute's default unit of measure is used. If the underlying stream is a point, this value may not be specified, as points are not associated with a unit of measure.. | [optional]
  **retrievalMode** | **String**| An optional value that determines the value to return when a value doesn't exist at the exact time specified. The default is 'Auto'.. | [optional]
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
@@ -206,7 +210,7 @@ Name | Type | Description | Notes
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
 # **getRecordedAtTimes**
-> getRecordedAtTimes(String webId, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone)
+> getRecordedAtTimes(String webId, String associations, String desiredUnits, String retrievalMode, String selectedFields, String sortOrder, List<String> time, String timeZone)
 
 Retrieves recorded values at the specified times.
 
@@ -215,6 +219,7 @@ Retrieves recorded values at the specified times.
 Name | Type | Description | Notes
 ------------- | ------------- | ------------- | -------------
  **webId** | **String**| The ID of the stream.. | [required]
+ **associations** | **String**| Associated values to return in the response, separated by semicolons (;). This call supports Annotations to return events with annotation values. If this parameter is not specified, annotation values are not returned.. | [optional]
  **desiredUnits** | **String**| The name or abbreviation of the desired units of measure for the returned value, as found in the UOM database associated with the attribute. If not specified for an attribute, the attribute's default unit of measure is used. If the underlying stream is a point, this value may not be specified, as points are not associated with a unit of measure.. | [optional]
  **retrievalMode** | **String**| An optional value that determines the value to return when a value doesn't exist at the exact time specified. The default is 'Auto'.. | [optional]
  **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
@@ -258,6 +263,26 @@ Name | Type | Description | Notes
 
 [[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
 
+# **registerStreamUpdate**
+> registerStreamUpdate(String webId, String selectedFields, String webIdType)
+
+Register for stream updates
+
+### Parameters
+
+Name | Type | Description | Notes
+------------- | ------------- | ------------- | -------------
+ **webId** | **String**| The ID of the stream.. | [required]
+ **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
+ **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
+
+
+### Return type
+
+
+
+[[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
+
 # **getValue**
 > getValue(String webId, String desiredUnits, String selectedFields, String time, String timeZone)
 
@@ -293,6 +318,27 @@ Name | Type | Description | Notes
  **value** | **PITimedValue**| The value to add or update.. | [required]
  **bufferOption** | **String**| The desired AFBufferOption. The default is 'BufferIfPossible'.. | [optional]
  **updateOption** | **String**| The desired AFUpdateOption. The default is 'Replace'. This parameter is ignored if the attribute is a configuration item.. | [optional]
+ **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
+
+
+### Return type
+
+
+
+[[Back to top]](#) [[Back to API list]](../../DOCUMENTATION.md#documentation-for-api-endpoints) [[Back to Model list]](../../DOCUMENTATION.md#documentation-for-models) [[Back to DOCUMENTATION]](../../DOCUMENTATION.md)
+
+# **retrieveStreamUpdate**
+> retrieveStreamUpdate(String marker, String desiredUnits, String selectedFields, String webIdType)
+
+Receive stream updates
+
+### Parameters
+
+Name | Type | Description | Notes
+------------- | ------------- | ------------- | -------------
+ **marker** | **String**| Identifier of stream source and current position. | [required]
+ **desiredUnits** | **String**| The name or abbreviation of the desired units of measure for the returned value, as found in the UOM database associated with the attribute. If not specified for an attribute, the attribute's default unit of measure is used. If the underlying stream is a point, this value may not be specified, as points are not associated with a unit of measure.. | [optional]
+ **selectedFields** | **String**| List of fields to be returned in the response, separated by semicolons (;). If this parameter is not specified, all available fields will be returned.. | [optional]
  **webIdType** | **String**| Optional parameter. Used to specify the type of WebID. Useful for URL brevity and other special cases. Default is the value of the configuration item "WebIDType".. | [optional]
 
 

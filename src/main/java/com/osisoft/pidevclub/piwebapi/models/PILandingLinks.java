@@ -35,6 +35,9 @@ public class PILandingLinks {
 	@SerializedName("DataServers")
 	private String dataServers = null;
 
+	@SerializedName("PIDirectory")
+	private String pIDirectory = null;
+
 	@SerializedName("Search")
 	private String search = null;
 
@@ -56,6 +59,10 @@ public class PILandingLinks {
 	public void setDataServers(String dataServers) { this.dataServers = dataServers;}
 
 	public String getDataServers() { return this.dataServers;}
+
+	public void setPIDirectory(String pIDirectory) { this.pIDirectory = pIDirectory;}
+
+	public String getPIDirectory() { return this.pIDirectory;}
 
 	public void setSearch(String search) { this.search = search;}
 

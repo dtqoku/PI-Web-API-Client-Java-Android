@@ -143,12 +143,18 @@ public class PIWebApiClient
         return new  HomeApi(apiClient);
     }
 
+    public NotificationContactTemplateApi getNotificationContactTemplate()   {    return new  NotificationContactTemplateApi(apiClient); }
+
+    public NotificationRuleApi NotificationRule() { return new NotificationRuleApi(apiClient); }
+
+    public NotificationRuleSubscriberApi NotificationRuleSubscriber() { return new NotificationRuleSubscriberApi(apiClient); }
+
+    public NotificationRuleTemplateApi NotificationRuleTemplate() { return new NotificationRuleTemplateApi(apiClient); }
 
     public PointApi getPoint()
     {
         return new PointApi(apiClient);
     }
-
 
     public SecurityIdentityApi getSecurityIdentity()
     {

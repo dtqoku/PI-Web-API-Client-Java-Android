@@ -44,8 +44,17 @@ public class PIElementTemplateLinks {
 	@SerializedName("BaseTemplate")
 	private String baseTemplate = null;
 
+	@SerializedName("BaseTemplates")
+	private String baseTemplates = null;
+
+	@SerializedName("DerivedTemplates")
+	private String derivedTemplates = null;
+
 	@SerializedName("DefaultAttribute")
 	private String defaultAttribute = null;
+
+	@SerializedName("NotificationRuleTemplates")
+	private String notificationRuleTemplates = null;
 
 	@SerializedName("Security")
 	private String security = null;
@@ -81,9 +90,21 @@ public class PIElementTemplateLinks {
 
 	public String getBaseTemplate() { return this.baseTemplate;}
 
+	public void setBaseTemplates(String baseTemplates) { this.baseTemplates = baseTemplates;}
+
+	public String getBaseTemplates() { return this.baseTemplates;}
+
+	public void setDerivedTemplates(String derivedTemplates) { this.derivedTemplates = derivedTemplates;}
+
+	public String getDerivedTemplates() { return this.derivedTemplates;}
+
 	public void setDefaultAttribute(String defaultAttribute) { this.defaultAttribute = defaultAttribute;}
 
 	public String getDefaultAttribute() { return this.defaultAttribute;}
+
+	public void setNotificationRuleTemplates(String notificationRuleTemplates) { this.notificationRuleTemplates = notificationRuleTemplates;}
+
+	public String getNotificationRuleTemplates() { return this.notificationRuleTemplates;}
 
 	public void setSecurity(String security) { this.security = security;}
 

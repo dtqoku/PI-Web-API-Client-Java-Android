@@ -672,6 +672,96 @@ public class AssetServerApi {
 	}
 
 	/**
+	 * Retrieve a list of all notification contact templates on the specified Asset Server. 
+	 *
+	 */
+	public PIItemsNotificationContactTemplate getNotificationContactTemplates(String webId, String selectedFields, String webIdType) throws ApiException {
+		ApiResponse<PIItemsNotificationContactTemplate> resp = getNotificationContactTemplatesWithHttpInfo(webId, selectedFields, webIdType);
+		return resp.getData();
+	}
+
+	/**
+	 * Retrieve a list of all notification contact templates on the specified Asset Server. (with HTTP information)
+	 *
+	 */
+	public ApiResponse<PIItemsNotificationContactTemplate> getNotificationContactTemplatesWithHttpInfo(String webId, String selectedFields, String webIdType) throws ApiException {
+		okhttp3.Call call = getNotificationContactTemplatesCall(webId, selectedFields, webIdType,null,null);
+		Type localVarReturnType = new TypeToken<PIItemsNotificationContactTemplate>(){}.getType();
+		return apiClient.execute(call, localVarReturnType);
+	}
+
+	/**
+	 * Retrieve a list of all notification contact templates on the specified Asset Server. (asynchronously)
+	 *
+	 */
+	public okhttp3.Call getNotificationContactTemplatesAsync(String webId, String selectedFields, String webIdType, final ApiCallback<PIItemsNotificationContactTemplate> callback) throws ApiException {
+		ProgressResponseBody.ProgressListener progressListener = null;
+		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+		if (callback != null)
+		{
+			progressListener = new ProgressResponseBody.ProgressListener() {
+				@Override
+				public void update(long bytesRead, long contentLength, boolean done)
+				{
+					callback.onDownloadProgress(bytesRead, contentLength, done);
+				}
+			};
+			progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+				@Override
+				public void onRequestProgress(long bytesWritten, long contentLength, boolean done)
+				{
+					callback.onUploadProgress(bytesWritten, contentLength, done);
+				}
+			};
+		}
+		okhttp3.Call call = getNotificationContactTemplatesCall(webId, selectedFields, webIdType, progressListener, progressRequestListener);
+		apiClient.executeAsync(call, callback);
+		return call;
+	}
+
+	private okhttp3.Call getNotificationContactTemplatesCall(String webId, String selectedFields, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+		Object localVarPostBody =  null;
+		// verify the required parameter 'webId' is set
+		if (webId == null)
+			throw new ApiException("Missing required parameter 'webId'");
+		String localVarPath = "/assetservers/{webId}/notificationcontacttemplates";
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+
+		final String[] localVarAccepts = {"application/json", "text/json", "text/html", "application/x-ms-application"};
+
+		final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+		if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+		final String[] localVarContentTypes = {"application/json", "text/json" };
+
+		final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+		localVarHeaderParams.put("Content-Type", localVarContentType);
+
+		localVarPath = localVarPath.replaceAll("\\{webId\\}", apiClient.escapeString(webId.toString()));
+		if (selectedFields != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "selectedFields", selectedFields));
+		if (webIdType != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "webIdType", webIdType));
+		if (progressListener != null)
+		{
+			apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+			@Override
+			public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+				okhttp3.Response originalResponse = chain.proceed(chain.request());
+				return originalResponse.newBuilder()
+				.body(new ProgressResponseBody(originalResponse.body(), progressListener))
+				.build();
+				}
+			});
+		}
+		String[] localVarAuthNames = new String[] {"Basic" };
+		return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+	}
+
+	/**
 	 * Get the security information of the specified security item associated with the asset server for a specified user. 
 	 *
 	 */

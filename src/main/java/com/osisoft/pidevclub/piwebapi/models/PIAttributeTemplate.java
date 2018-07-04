@@ -80,6 +80,9 @@ public class PIAttributeTemplate {
 	@SerializedName("TraitName")
 	private String traitName = null;
 
+	@SerializedName("DefaultUnitsNameAbbreviation")
+	private String defaultUnitsNameAbbreviation = null;
+
 	@SerializedName("Links")
 	private PIAttributeTemplateLinks links = null;
 
@@ -161,6 +164,10 @@ public class PIAttributeTemplate {
 	public void setTraitName(String traitName) { this.traitName = traitName;}
 
 	public String getTraitName() { return this.traitName;}
+
+	public void setDefaultUnitsNameAbbreviation(String defaultUnitsNameAbbreviation) { this.defaultUnitsNameAbbreviation = defaultUnitsNameAbbreviation;}
+
+	public String getDefaultUnitsNameAbbreviation() { return this.defaultUnitsNameAbbreviation;}
 
 	public void setLinks(PIAttributeTemplateLinks links) { this.links = links;}
 

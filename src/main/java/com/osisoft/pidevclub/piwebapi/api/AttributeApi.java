@@ -400,8 +400,8 @@ public class AttributeApi {
 	 * Get the child attributes of the specified attribute. 
 	 *
 	 */
-	public PIItemsAttribute getAttributes(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType) throws ApiException {
-		ApiResponse<PIItemsAttribute> resp = getAttributesWithHttpInfo(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, webIdType);
+	public PIItemsAttribute getAttributes(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType) throws ApiException {
+		ApiResponse<PIItemsAttribute> resp = getAttributesWithHttpInfo(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, trait, traitCategory, valueType, webIdType);
 		return resp.getData();
 	}
 
@@ -409,8 +409,8 @@ public class AttributeApi {
 	 * Get the child attributes of the specified attribute. (with HTTP information)
 	 *
 	 */
-	public ApiResponse<PIItemsAttribute> getAttributesWithHttpInfo(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType) throws ApiException {
-		okhttp3.Call call = getAttributesCall(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, webIdType,null,null);
+	public ApiResponse<PIItemsAttribute> getAttributesWithHttpInfo(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType) throws ApiException {
+		okhttp3.Call call = getAttributesCall(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, trait, traitCategory, valueType, webIdType,null,null);
 		Type localVarReturnType = new TypeToken<PIItemsAttribute>(){}.getType();
 		return apiClient.execute(call, localVarReturnType);
 	}
@@ -419,7 +419,7 @@ public class AttributeApi {
 	 * Get the child attributes of the specified attribute. (asynchronously)
 	 *
 	 */
-	public okhttp3.Call getAttributesAsync(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType, final ApiCallback<PIItemsAttribute> callback) throws ApiException {
+	public okhttp3.Call getAttributesAsync(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType, final ApiCallback<PIItemsAttribute> callback) throws ApiException {
 		ProgressResponseBody.ProgressListener progressListener = null;
 		ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
 		if (callback != null)
@@ -439,12 +439,12 @@ public class AttributeApi {
 				}
 			};
 		}
-		okhttp3.Call call = getAttributesCall(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, valueType, webIdType, progressListener, progressRequestListener);
+		okhttp3.Call call = getAttributesCall(webId, categoryName, maxCount, nameFilter, searchFullHierarchy, selectedFields, showExcluded, showHidden, sortField, sortOrder, startIndex, templateName, trait, traitCategory, valueType, webIdType, progressListener, progressRequestListener);
 		apiClient.executeAsync(call, callback);
 		return call;
 	}
 
-	private okhttp3.Call getAttributesCall(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, String valueType, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+	private okhttp3.Call getAttributesCall(String webId, String categoryName, Integer maxCount, String nameFilter, Boolean searchFullHierarchy, String selectedFields, Boolean showExcluded, Boolean showHidden, String sortField, String sortOrder, Integer startIndex, String templateName, List<String> trait, List<String> traitCategory, String valueType, String webIdType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 		Object localVarPostBody =  null;
 		// verify the required parameter 'webId' is set
 		if (webId == null)
@@ -488,6 +488,10 @@ public class AttributeApi {
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "startIndex", startIndex));
 		if (templateName != null)
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "templateName", templateName));
+		if (trait != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "trait", trait));
+		if (traitCategory != null)
+			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "traitCategory", traitCategory));
 		if (valueType != null)
 			localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "valueType", valueType));
 		if (webIdType != null)

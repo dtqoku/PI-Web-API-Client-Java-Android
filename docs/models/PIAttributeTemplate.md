@@ -21,6 +21,7 @@ Name | Type | Notes
 **HasChildren** | **Boolean**
 **CategoryNames** | **List<String>**
 **TraitName** | **String**
+**DefaultUnitsNameAbbreviation** | **String**
 **Links** | **[**PIAttributeTemplateLinks**](../models/PIAttributeTemplateLinks.md)**
 **WebException** | **[**PIWebException**](../models/PIWebException.md)**
 

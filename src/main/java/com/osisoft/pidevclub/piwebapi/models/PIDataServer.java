@@ -44,6 +44,9 @@ public class PIDataServer {
 	@SerializedName("ServerVersion")
 	private String serverVersion = null;
 
+	@SerializedName("ServerTime")
+	private String serverTime = null;
+
 	@SerializedName("Links")
 	private PIDataServerLinks links = null;
 
@@ -77,6 +80,10 @@ public class PIDataServer {
 	public void setServerVersion(String serverVersion) { this.serverVersion = serverVersion;}
 
 	public String getServerVersion() { return this.serverVersion;}
+
+	public void setServerTime(String serverTime) { this.serverTime = serverTime;}
+
+	public String getServerTime() { return this.serverTime;}
 
 	public void setLinks(PIDataServerLinks links) { this.links = links;}
 

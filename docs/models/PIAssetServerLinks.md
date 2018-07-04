@@ -5,6 +5,7 @@ Name | Type | Notes
 ------------ | ------------- | -------------
 **Self** | **String**
 **Databases** | **String**
+**NotificationContactTemplates** | **String**
 **SecurityIdentities** | **String**
 **SecurityMappings** | **String**
 **UnitClasses** | **String**

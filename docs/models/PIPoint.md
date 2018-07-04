@@ -11,9 +11,12 @@ Name | Type | Notes
 **PointClass** | **String**
 **PointType** | **String**
 **DigitalSetName** | **String**
+**Span** | **Double**
+**Zero** | **Double**
 **EngineeringUnits** | **String**
 **Step** | **Boolean**
 **Future** | **Boolean**
+**DisplayDigits** | **Integer**
 **Links** | **[**PIPointLinks**](../models/PIPointLinks.md)**
 **WebException** | **[**PIWebException**](../models/PIWebException.md)**
 

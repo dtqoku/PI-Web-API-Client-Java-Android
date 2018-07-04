@@ -35,6 +35,9 @@ public class PISystemStatus {
 	@SerializedName("CacheInstances")
 	private Integer cacheInstances = null;
 
+	@SerializedName("ServerTime")
+	private String serverTime = null;
+
 	@SerializedName("WebException")
 	private PIWebException webException = null;
 
@@ -53,6 +56,10 @@ public class PISystemStatus {
 	public void setCacheInstances(Integer cacheInstances) { this.cacheInstances = cacheInstances;}
 
 	public Integer getCacheInstances() { return this.cacheInstances;}
+
+	public void setServerTime(String serverTime) { this.serverTime = serverTime;}
+
+	public String getServerTime() { return this.serverTime;}
 
 	public void setWebException(PIWebException webException) { this.webException = webException;}
 
