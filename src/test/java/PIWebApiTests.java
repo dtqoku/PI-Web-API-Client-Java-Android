@@ -21,6 +21,10 @@ import static junit.framework.TestCase.*;
 public class PIWebApiTests {
     private PIWebApiClient generatePIWebApiInstance()
     {
+
+        //TODO: The PI Web API client must provide a user name and password when using “basic” authentication
+        //Store passwords outside of the code in a hardware TPM, trusted service (credential manager) or in a protected file.
+        //Code to return the user name and password is not shown here.
         return  new PIWebApiClient("https://marc-rras.osisoft.int/piwebapi", "marc.adm", "kk", false, false);
     }
 
