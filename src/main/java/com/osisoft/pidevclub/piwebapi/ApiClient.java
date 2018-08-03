@@ -620,9 +620,9 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setConnectTimeout(int connectionTimeout) {
-        clientBuilder.connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS);
+        clientBuilder.connectTimeout(connectionTimeout, TimeUnit.SECONDS)
+                .writeTimeout(connectionTimeout, TimeUnit.SECONDS)
+                .readTimeout(connectionTimeout, TimeUnit.SECONDS);
         return this;
     }
 
