@@ -614,21 +614,6 @@ public class ApiClient {
 
     /**
      * Sets the connect timeout (in seconds).
-     * A value of 0 means no timeout
-     *
-     * @param connectionTimeout default connect timeout in seconds. The connectTimeout is applied when connecting a TCP socket to the target host.
-     * @param writeTimeout default read timeout in seconds. The write timeout is applied for individual write IO operations. 
-     * @param readTimeout default write timeout in seconds. The read timeout is applied to both the TCP socket and for individual read IO operations including on Source of the Response.
-     */
-    public setConnectTimeoutHttpClient(int connectionTimeout, int writeTimeout, int readTimeout) {
-		this.httpClient = new clientBuilder.connectTimeout(connectionTimeout, TimeUnit.SECONDS)
-				.writeTimeout(writeTimeout, TimeUnit.SECONDS)
-				.readTimeout(readTimeout, TimeUnit.SECONDS)
-				.build();
-    }
-
-    /**
-     * Sets the connect timeout (in seconds).
      * A value of 0 means no timeout, otherwise values must be between 1 and
      *
      * @param connectionTimeout connection timeout in milliseconds
