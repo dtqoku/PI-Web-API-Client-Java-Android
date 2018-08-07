@@ -619,10 +619,10 @@ public class ApiClient {
      * @param connectionTimeout connection timeout in milliseconds
      * @return Api client
      */
-    public ApiClient setConnectTimeout(int connectionTimeout) {
+    public ApiClient setConnectTimeout(int connectionTimeout, int writeTimeout, int readTimeout) {
         clientBuilder.connectTimeout(connectionTimeout, TimeUnit.SECONDS)
-                .writeTimeout(connectionTimeout, TimeUnit.SECONDS)
-                .readTimeout(connectionTimeout, TimeUnit.SECONDS);
+                .writeTimeout(writeTimeout, TimeUnit.SECONDS)
+                .readTimeout(readTimeout, TimeUnit.SECONDS);
         return this;
     }
 	
