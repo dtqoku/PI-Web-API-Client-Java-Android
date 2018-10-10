@@ -9,13 +9,14 @@ public class PIWebApiClient
     private String baseUrl = null;
     private Boolean cacheDisabled = null;
 
-    public PIWebApiClient(String baseUrl, String username, String password, Boolean verifySsl, Boolean debug)
+    public PIWebApiClient(String baseUrl, String username, String password, Boolean verifySsl, Boolean debug, int timeOut)
     {
         this.baseUrl = baseUrl;
         this.cacheDisabled = true;
         this.apiClient = new ApiClient();
         this.apiClient.setVerifyingSsl(verifySsl);
         this.apiClient.setDebugging(debug);
+        this.apiClient.setConnectTimeout(timeOut);
         this.apiClient.buildClient();
         this.apiClient.setBasicAuth();
         this.apiClient.setUsername(username);
